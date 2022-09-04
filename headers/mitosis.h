@@ -12,6 +12,9 @@ void SplitCellIntoTwo(Cell cells[], int cellIndex)
     speedX = GenerateRandomNumber(200, 250);
     speedY = GenerateRandomNumber(200, 250);
 
+    if (cells[cellIndex].speedY < 0)
+        speedY = -speedY;
+
     index1 = cellIndex;
 
     CreateCell(cells,
@@ -24,7 +27,6 @@ void SplitCellIntoTwo(Cell cells[], int cellIndex)
 
     // Cell 2
     speedX = -speedX;
-    speedX = -speedY;
 
     index2 = GetNextEmptyCellIndex(cells, MAX_CELLS);
 
