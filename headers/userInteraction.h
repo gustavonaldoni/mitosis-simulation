@@ -1,4 +1,5 @@
 bool UserClickedOnCell(Cell);
+int CheckUserClickOnAllCells(Cell*, int);
 
 bool UserClickedOnCell(Cell cell)
 {
