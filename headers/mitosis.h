@@ -1,4 +1,6 @@
 void SplitCellIntoTwo(Cell *, int);
+void GrowCell(Cell *, float, float);
+void GrowCells(Cell *, int, float, float);
 
 void SplitCellIntoTwo(Cell cells[], int cellIndex)
 {
@@ -41,5 +43,21 @@ void SplitCellIntoTwo(Cell cells[], int cellIndex)
                    speedX,
                    speedY,
                    radius1);
+    }
+}
+
+void GrowCell(Cell* cell, float growthFactor, float maxSize)
+{
+    if (cell->radius <= maxSize)
+        cell->radius *= growthFactor;
+}
+
+void GrowCells(Cell cells[], int maxCells, float growthFactor, float maxSize)
+{
+    int i;
+
+    for (i = 0; i < maxCells; i++)
+    {
+        GrowCell(&cells[i], growthFactor, maxSize);
     }
 }

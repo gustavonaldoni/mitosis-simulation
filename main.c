@@ -10,6 +10,8 @@
 #define INITIAL_CELLS MAX_CELLS / 20
 
 #define STATS_FONT_SIZE 25
+#define GROWTH_FACTOR 1.0001
+#define MAX_CELL_SIZE 60.0
 
 #include "headers/utils.h"
 #include "headers/cell.h"
@@ -37,6 +39,7 @@ int main()
 	while (!WindowShouldClose())
 	{
 		MoveCells(cells, totalCells);
+		GrowCells(cells, totalCells, GROWTH_FACTOR, MAX_CELL_SIZE);
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
