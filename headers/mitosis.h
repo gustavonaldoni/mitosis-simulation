@@ -1,6 +1,7 @@
 void SplitCellIntoTwo(Cell *, int);
 void GrowCell(Cell *, float, float);
 void GrowCells(Cell *, int, float, float);
+void AutomaticSplitCellsIntoTwo(Cell* , int, int*, float);
 
 void SplitCellIntoTwo(Cell cells[], int cellIndex)
 {
@@ -9,7 +10,7 @@ void SplitCellIntoTwo(Cell cells[], int cellIndex)
     int index1, index2;
 
     // Cell 1
-    radius1 = cells[cellIndex].radius / 2;
+    radius1 = cells[cellIndex].radius / powf((float)2, 0.5);
 
     speedX = GenerateRandomNumber(200, 250);
     speedY = GenerateRandomNumber(200, 250);
@@ -46,9 +47,9 @@ void SplitCellIntoTwo(Cell cells[], int cellIndex)
     }
 }
 
-void GrowCell(Cell* cell, float growthFactor, float maxSize)
+void GrowCell(Cell *cell, float growthFactor, float maxSize)
 {
-    if (cell->radius <= maxSize)
+    if (cell->radius < maxSize)
         cell->radius *= growthFactor;
 }
 
@@ -59,5 +60,20 @@ void GrowCells(Cell cells[], int maxCells, float growthFactor, float maxSize)
     for (i = 0; i < maxCells; i++)
     {
         GrowCell(&cells[i], growthFactor, maxSize);
+    }
+}
+
+void AutomaticSplitCellsIntoTwo(Cell cells[], int maxCells, int* totalCells, float maxSize)
+{
+    int i;
+
+    for (i = 0; i < maxCells; i++)
+    {
+        if (cells[i].radius >= maxSize)
+        {
+            SplitCellIntoTwo(cells, i);
+            *totalCells += 1;
+        }
+            
     }
 }

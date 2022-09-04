@@ -6,7 +6,7 @@
 
 // Compile with: gcc main.c -o mitosisSimulator.exe -O1 -Wall -std=c99 -Wno-missing-braces -I include/ -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
 
-#define MAX_CELLS 200
+#define MAX_CELLS 400
 #define INITIAL_CELLS MAX_CELLS / 20
 
 #define STATS_FONT_SIZE 25
@@ -40,6 +40,8 @@ int main()
 	{
 		MoveCells(cells, totalCells);
 		GrowCells(cells, totalCells, GROWTH_FACTOR, MAX_CELL_SIZE);
+
+		//AutomaticSplitCellsIntoTwo(cells, MAX_CELLS, &totalCells, MAX_CELL_SIZE);
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);

@@ -12,6 +12,7 @@
         "turn.h": "c",
         "checkwin.h": "c",
         "devname.h": "c",
-        "mitosis.h": "c"
+        "mitosis.h": "c",
+        "userinteraction.h": "c"
     }
 }
