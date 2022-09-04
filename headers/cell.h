@@ -11,7 +11,6 @@ void CreateCell(Cell *, int, int, int, int, int, float);
 void CreateCells(Cell *, int);
 void DrawCell(Cell);
 void DrawCells(Cell *, int);
-float GetCellArea(Cell);
 int GetNextEmptyCellIndex(Cell *, int);
 void ResetCellsValidations(Cell *, int);
 
@@ -95,11 +94,6 @@ void MoveCells(Cell cells[], int maxCells)
         if (cells[i].y <= 0)
             cells[i].speedY *= -1;
     }
-}
-
-float GetCellArea(Cell cell)
-{
-    return (float)(PI * cell.radius * cell.radius);
 }
 
 int GetNextEmptyCellIndex(Cell cells[], int maxCells)
