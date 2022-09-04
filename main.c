@@ -4,10 +4,14 @@
 #include "include/raylib.h"
 #include "headers/utils.h"
 #include "headers/cell.h"
+#include "headers/userInteraction.h"
 
 // Compile with: gcc main.c -o mitosisSimulator.exe -O1 -Wall -std=c99 -Wno-missing-braces -I include/ -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
 
 #define MAX_CELLS 200
+#define INITIAL_CELLS MAX_CELLS / 4
+
+int cellClickedIndex;
 
 int main()
 {
@@ -20,16 +24,31 @@ int main()
 	SetTargetFPS(144);
 	InitAudioDevice();
 
-	CreateCells(cells, MAX_CELLS / 2);
+	CreateCells(cells, INITIAL_CELLS);
 
 	while (!WindowShouldClose())
 	{
-		MoveCells(cells, MAX_CELLS / 2);
+		MoveCells(cells, INITIAL_CELLS);
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 
-		DrawCells(cells, MAX_CELLS / 2);
+		cellClickedIndex = CheckUserClickOnAllCells(cells, INITIAL_CELLS);
+
+		if (cellClickedIndex != -1)
+			DrawCenteredText(TextFormat("Cell clicked index = %d", cellClickedIndex), 
+							 GetScreenHeight() / 12,
+							 20, 
+							 DARKGRAY);
+		
+		else if (cellClickedIndex == -1)
+			DrawCenteredText("No cell clicked now", 
+							 GetScreenHeight() / 12,
+							 20, 
+							 DARKGRAY);
+
+
+		DrawCells(cells, INITIAL_CELLS);
 
 		EndDrawing();
 	}
