@@ -1,5 +1,6 @@
 int GenerateRandomNumber(int, int);
 bool RandomProbabilityManipulation(int);
+void DrawCenteredText(char *, int, int, Color);
 
 int GenerateRandomNumber(int lower, int upper)
 {
@@ -9,8 +10,15 @@ int GenerateRandomNumber(int lower, int upper)
 bool RandomProbabilityManipulation(int percentage)
 {
     int n;
-    
+
     n = (rand() % 100) + 1;
-    
+
     return n <= percentage;
+}
+
+void DrawCenteredText(char *text, int y, int fontSize, Color color)
+{
+    int x = (GetScreenWidth() - MeasureText(text, fontSize)) / 2;
+
+    DrawText(text, x, y, fontSize, color);
 }
