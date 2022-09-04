@@ -1,17 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "include/raylib.h"
-#include "headers/utils.h"
-#include "headers/cell.h"
-#include "headers/userInteraction.h"
 
 // Compile with: gcc main.c -o mitosisSimulator.exe -O1 -Wall -std=c99 -Wno-missing-braces -I include/ -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
 
 #define MAX_CELLS 200
-#define INITIAL_CELLS MAX_CELLS / 4
+#define INITIAL_CELLS MAX_CELLS / 20
+
+#include "headers/utils.h"
+#include "headers/cell.h"
+#include "headers/userInteraction.h"
+#include "headers/mitosis.h"
 
 int cellClickedIndex;
+int totalCells = INITIAL_CELLS;
 
 int main()
 {
@@ -24,31 +28,26 @@ int main()
 	SetTargetFPS(144);
 	InitAudioDevice();
 
-	CreateCells(cells, INITIAL_CELLS);
+	ResetCellsValidations(cells, MAX_CELLS);
+	CreateCells(cells, totalCells);
 
 	while (!WindowShouldClose())
 	{
-		MoveCells(cells, INITIAL_CELLS);
+		MoveCells(cells, totalCells);
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 
-		cellClickedIndex = CheckUserClickOnAllCells(cells, INITIAL_CELLS);
+		cellClickedIndex = CheckUserClickOnAllCells(cells, totalCells);
 
 		if (cellClickedIndex != -1)
-			DrawCenteredText(TextFormat("Cell clicked index = %d", cellClickedIndex), 
-							 GetScreenHeight() / 12,
-							 20, 
-							 DARKGRAY);
-		
-		else if (cellClickedIndex == -1)
-			DrawCenteredText("No cell clicked now", 
-							 GetScreenHeight() / 12,
-							 20, 
-							 DARKGRAY);
+		{
+			SplitCellIntoTwo(cells, cellClickedIndex);
+			totalCells += 1;
+		}
 
-
-		DrawCells(cells, INITIAL_CELLS);
+		DrawCells(cells, totalCells);
+		DrawCenteredText(TextFormat("Number of cells: %d", totalCells), GetScreenHeight() / 12, 30, DARKGRAY);
 
 		EndDrawing();
 	}

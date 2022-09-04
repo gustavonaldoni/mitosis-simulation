@@ -3,10 +3,10 @@ int CheckUserClickOnAllCells(Cell*, int);
 
 bool UserClickedOnCell(Cell cell)
 {
-    return IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && 
+    return (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
            CheckCollisionPointCircle(GetMousePosition(), 
                                    (Vector2){cell.x, cell.y}, 
-                                   cell.radius);
+                                   cell.radius));
 }
 
 int CheckUserClickOnAllCells(Cell cells[], int maxCells)
