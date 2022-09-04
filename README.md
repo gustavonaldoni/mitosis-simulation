@@ -1,2 +1,2 @@
-# mitosis-simulation
-A fair 
+# Mitosis Simulator
+
