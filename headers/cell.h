@@ -34,8 +34,8 @@ void CreateCells(Cell cells[], int maxCells)
     {
         radius = GenerateRandomNumber(20, 40);
 
-        speedX = GenerateRandomNumber(200, 500);
-        speedY = GenerateRandomNumber(200, 500);
+        speedX = GenerateRandomNumber(200, 300);
+        speedY = GenerateRandomNumber(200, 300);
         
         if (RandomProbabilityManipulation(50))
             speedX = -speedX;
