@@ -9,10 +9,13 @@
 #define MAX_CELLS 200
 #define INITIAL_CELLS MAX_CELLS / 20
 
+#define STATS_FONT_SIZE 25
+
 #include "headers/utils.h"
 #include "headers/cell.h"
 #include "headers/userInteraction.h"
 #include "headers/mitosis.h"
+#include "headers/timeDraw.h"
 
 int cellClickedIndex;
 int totalCells = INITIAL_CELLS;
@@ -47,7 +50,9 @@ int main()
 		}
 
 		DrawCells(cells, totalCells);
-		DrawCenteredText(TextFormat("Number of cells: %d", totalCells), GetScreenHeight() / 12, 30, DARKGRAY);
+
+		DrawNumberOfCells(totalCells, GetScreenHeight() / 12, STATS_FONT_SIZE, DARKGRAY);
+		DrawElapsedTime(1.5 * GetScreenHeight() / 12, STATS_FONT_SIZE, DARKGRAY);
 
 		EndDrawing();
 	}
